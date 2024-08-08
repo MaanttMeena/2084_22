@@ -1,6 +1,6 @@
-# 2084_22
-FliSpark GitHub Copilot Assessment
-**Introduction**
+# FliSpark GitHub Copilot Assessment
+
+## Introduction
 Welcome to the FliSpark assessment.
 
 FliSpark is an imaginary airline. Currently it incorporates static fare for each flight. It wants to convert its base static fare into dynamic fare. Details about the dynamic fare calculation is explained below.
