@@ -28,7 +28,7 @@ If seat occupancy is between 51% and 75%, then $10 will be added to the dynamic 
 If seat occupancy is above 75% then $30 will be added to the dynamic fare.
 To avoid discrepancy in fractional data, the test base fare will always be a multiple of 10, hence the base fare and dynamic fare will always be a whole number.
 
-**Test Data**
+## Test Data
 Test data is provided in data.json in the root folder of this repository.
 
 Use the test data available in data.json as reference for building the REST API.
@@ -37,8 +37,8 @@ Consider data.json as the database for flight schedules and the REST API must re
 
 **IMPORTANT NOTE:** Do not modify the test data provided in data.json. Feel free to add your own test data entries without disturbing the existing entries.
 
-**Example 1**
-Input
+## Example 1
+**Input**
 GET
 http://localhost:60000/api/v1/flight-schedules/522/2024-06-01
 The parameter 522 represents the flight schedule id and 2024-06-01 represents the booking date.
@@ -58,12 +58,13 @@ Below is the data for flight schedule with id 522 in data.json.
     "seatsBooked": 25,
     "dynamicFare": 0
 }
-Output
+**Output**
 For the above request, it must return the below status code and JSON response.
 
 400
 {"message":"Booking date not within 100 day range"}
-Explanation
+
+**Explanation**
 The scheduled departureDateTime for flight schedule with id 522 is 2024-09-11T06:00:00Z. Departure time is in local time.
 
 The days from 03 Jun 2024 to 10 Sep 2024 is the booking period duration of 100 days.
@@ -72,11 +73,12 @@ Jun - 28 days; Jul - 31 days; Aug - 31 days; Sep - 10 days; 28 + 31 + 31 + 10 = 
 
 The booking date provided in the URL 2024-06-01 is two days before the booking start date of 03 Jun 2024, hence the booking date is not valid, hence the above request must return response status code as 400 with appropriate error message.
 
-**Example 2**
-Input
+## Example 2
+**Input**
 GET
 http://localhost:60000/api/v1/flight-schedules/522/2024-06-03
-Output
+
+**Output**
 For the above request, it must return the below status code and JSON response.
 
 200
@@ -93,7 +95,8 @@ For the above request, it must return the below status code and JSON response.
     "seatsBooked":25,
     "dynamicFare":200
 }
-Explanation
+
+**Explanation**
 In the JSON response data, the properties id, departure, arrival, flightNumber, aircraft, departureDateTime, arrivalDateTime, baseFare, totalSeats and seatsBooked must exactly match the values provided in data.json for flight schedule id 522.
 
 From the explanation in Example 1, we know that 3rd Jun 2024 is the date when booking starts.
@@ -102,11 +105,12 @@ If the booking date falls in the first 10 day period, then the dynamic fare must
 
 For this flight, the base fare is $400, half of this is $200, so the dynamic fare is $200, so in the response it is expected that the dynamicFare value must be 200.
 
-Example 3
-Input
+## Example 3
+**Input**
 GET
 http://localhost:60000/api/v1/flight-schedules/524/2024-08-16
-Output
+
+**Output**
 For the above request, it must return the below status code and JSON response.
 
 {
@@ -122,7 +126,8 @@ For the above request, it must return the below status code and JSON response.
     "seatsBooked":230,
     "dynamicFare":490
 }
-Explanation
+
+**Explanation**
 Refer table below, which shows the dynamic fare calculation for each 10 day period, considering 13th Sep as the departure date.
 
 5 Jun	15 Jun	25 Jun	5 Jul	15 Jul	25 Jul	4 Aug	14 Aug	24 Aug	3 Sep
@@ -141,7 +146,7 @@ The seat occupancy falls under 50% to 75% range, hence $10 needs to be added to 
 
 Dynamic Fare = $480 + $10 = $490
 
-Validation and Submission Guidelines
+### Validation and Submission Guidelines
 Click on the 'Validate' option available in the status bar to initiate validation, which will display the test results in a new window.
 
 When clicking 'Validate' option ensure that your services is running in port 60000 and the endpoints are configured exactly similar to the examples provided above.
