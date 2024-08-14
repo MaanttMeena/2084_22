@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Script on Startup",
+            "type": "shell",
+            "command": "code --install-extension ${workspaceFolder}/.devcontainer/ai-usage-analytics-0.0.1.vsix",
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            }
+        }
+    ]
+}
